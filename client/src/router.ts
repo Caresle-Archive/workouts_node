@@ -1,10 +1,14 @@
 import { FC } from "react";
 import Views from "./views/Views";
 
-export interface IRouteItem {
+export interface IGeneralRoute {
 	name: string;
 	path: string;
 	component: FC;
+}
+
+export interface IRouteItem extends IGeneralRoute {
+	subRoutes?: IGeneralRoute[];
 }
 
 const routes : IRouteItem[] = [
@@ -17,6 +21,13 @@ const routes : IRouteItem[] = [
 		path: '/user',
 		name: 'user',
 		component: Views.user,
+		subRoutes: [
+			{
+				path: '/user/name',
+				name: 'user-name',
+				component: Views.user,
+			}
+		]
 	}
 ];
 
