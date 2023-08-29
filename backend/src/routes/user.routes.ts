@@ -1,16 +1,16 @@
-import { Router } from 'express';
 import {
 	getUsers,
 	postUser,
 	putUser,
 	deleteUser,
 } from '../controllers/user.controller';
+import {
+	RouterGenerator
+} from '../helpers/router.helper';
 
-const routes = Router();
-
-routes.get('/users', getUsers);
-routes.post('/users', postUser);
-routes.put('/users/:id', putUser);
-routes.delete('/users/:id', deleteUser);
+const routes = RouterGenerator.resourceApi({
+	path: '/users',
+	functions: [getUsers, postUser, putUser, deleteUser],
+});
 
 export default routes;
