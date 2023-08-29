@@ -1,9 +1,9 @@
-import { WorkoutsType } from './workouts_type.entity';
+import { WorkoutsType } from './workoutsType.entity';
 import { User } from './user.entity';
 import { Weight } from './weight.entity';
 import { Workouts } from './workouts.entity';
 import { Deck } from './deck.entity';
-import { WorkoutLog } from './workout_log.entity';
+import { WorkoutLog } from './workoutLog.entity';
 
 export const entitiesList = {
 	workoutsType: WorkoutsType,
