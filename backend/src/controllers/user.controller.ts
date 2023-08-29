@@ -19,3 +19,55 @@ export const getUsers = async (_: Request, res: Response) => {
 		});
 	}
 };
+
+export const postUser = async (req: Request, res: Response) => {
+	try {
+		console.log(req.body);
+		return res.json({
+			success: true,
+			message: 'User created',
+			data: []
+		});
+	} catch (error) {
+		return res.status(500).json({
+			success: false,
+			message: 'Error',
+			data: [],
+		});
+	}
+};
+
+export const putUser = async (req: Request, res: Response) => {
+	try {
+		console.log(req.body);
+		console.log(req.params);
+		return res.json({
+			success: true,
+			message: 'User updated',
+			data: [],
+		});
+	} catch (error) {
+		return res.status(500).json({
+			success: false,
+			message: 'Error',
+			data: [],
+		});
+	}
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+	try {
+		console.log(req.params);
+		return res.json({
+			success: true,
+			message: 'User deleted',
+			data: [],
+		});
+	} catch (error) {
+		return res.status(500).json({
+			success: false,
+			message: 'Error',
+			data: [],
+		});
+	}
+};
