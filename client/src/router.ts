@@ -18,6 +18,33 @@ const routes : IRouteItem[] = [
 		component: Views.home,
 	},
 	{
+		path: '/decks',
+		name: 'decks',
+		component: Views.deck,
+	},
+	{
+		path: '/workouts',
+		name: 'workouts',
+		component: Views.workouts,
+		subRoutes: [
+			{
+				path: '/workouts',
+				name: 'workouts',
+				component: Views.workouts,
+			},
+			{
+				path: '/workouts/list',
+				name: 'list',
+				component: Views.workoutsList,
+			},
+			{
+				path: '/workouts/log',
+				name: 'log',
+				component: Views.workoutsLog,
+			},
+		],
+	},
+	{
 		path: '/user',
 		name: 'user',
 		component: Views.user,
@@ -28,7 +55,7 @@ const routes : IRouteItem[] = [
 				component: Views.user,
 			}
 		]
-	}
+	},
 ];
 
 export default routes;

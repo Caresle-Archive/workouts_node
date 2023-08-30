@@ -11,10 +11,6 @@ import {
 } from '@nextui-org/react';
 import UserMenu from "./UserMenu";
 import routes, { IGeneralRoute, IRouteItem } from "../../router";
-import Icon from '@mdi/react';
-import {
-	mdiArrowDown,
-} from '@mdi/js';
 import { Link } from "react-router-dom";
 
 const generateSubRoutes = (subRoute: IGeneralRoute) => {
@@ -22,9 +18,12 @@ const generateSubRoutes = (subRoute: IGeneralRoute) => {
 		<DropdownItem key={subRoute.path}
 			aria-label={subRoute.name}
 		>
-			<Link to={subRoute.path}>
+			{/* <div style={{ backgroundColor: 'blue'}}> */}
+
+			<Link to={subRoute.path} className="block">
 				{subRoute.name}
 			</Link>
+			{/* </div> */}
 		</DropdownItem>
 	);
 }
@@ -46,7 +45,7 @@ const generateRoutes = (route: IRouteItem) => {
 	return (
 		<NavbarItem key={route.path} aria-label={route.name}>
 			<Dropdown>
-				<DropdownTrigger>
+				<DropdownTrigger className="cursor-pointer">
 					{ route.name }
 				</DropdownTrigger>
 
