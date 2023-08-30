@@ -18,6 +18,11 @@ const routes : IRouteItem[] = [
 		component: Views.home,
 	},
 	{
+		path: '/weight',
+		name: 'weight',
+		component: Views.weight,
+	},
+	{
 		path: '/decks',
 		name: 'decks',
 		component: Views.deck,
