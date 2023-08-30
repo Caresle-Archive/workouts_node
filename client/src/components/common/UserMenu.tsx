@@ -19,8 +19,8 @@ const UserMenu : FC = () => {
 						className="transition-transform"
 					/>
 				</DropdownTrigger>
-				<DropdownMenu variant="flat">
-					<DropdownItem color="danger">
+				<DropdownMenu variant="flat" aria-label="menu-user">
+					<DropdownItem color="danger" aria-label="menu-user-log-out">
 						Log Out
 					</DropdownItem>
 				</DropdownMenu>

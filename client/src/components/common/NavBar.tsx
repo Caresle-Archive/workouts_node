@@ -8,18 +8,25 @@ import {
 	DropdownMenu,
 	DropdownItem,
 	DropdownTrigger,
-	Button,
 } from '@nextui-org/react';
 import UserMenu from "./UserMenu";
 import routes, { IGeneralRoute, IRouteItem } from "../../router";
-import NavBarButton from "./NavBarButton";
 import Icon from '@mdi/react';
 import {
 	mdiArrowDown,
 } from '@mdi/js';
+import { Link } from "react-router-dom";
 
 const generateSubRoutes = (subRoute: IGeneralRoute) => {
-	return <DropdownItem key={subRoute.path}>{subRoute.name}</DropdownItem>;
+	return (
+		<DropdownItem key={subRoute.path}
+			aria-label={subRoute.name}
+		>
+			<Link to={subRoute.path}>
+				{subRoute.name}
+			</Link>
+		</DropdownItem>
+	);
 }
 
 const generateRoutes = (route: IRouteItem) => {
@@ -27,30 +34,26 @@ const generateRoutes = (route: IRouteItem) => {
 
 	if (subRoutes === undefined || subRoutes?.length <= 0) {
 		return (
-			<NavbarItem key={route.path}>
-				<NavBarButton text={route.name} />
+			<NavbarItem key={route.path} aria-label={route.name}>
+				<Link to={route.path}>
+					{route.name}
+				</Link>
 			</NavbarItem>
+
 		)
 	}
 
 	return (
-		<NavbarItem key={route.path}>
+		<NavbarItem key={route.path} aria-label={route.name}>
 			<Dropdown>
 				<DropdownTrigger>
-					<Button
-						disableRipple endContent={
-							<Icon path={mdiArrowDown} />
-						}
-						radius="sm"
-						variant="faded"
-					>
-						{ route.name }
-					</Button>
+					{ route.name }
 				</DropdownTrigger>
+
 				{/* SubRoutes menu */}
-				<DropdownMenu>
+				<DropdownMenu aria-label={`menu-${route.name}`}>
 					{
-						...subRoutes.map(subRoute => generateSubRoutes(subRoute))
+						subRoutes.map(subRoute => generateSubRoutes(subRoute))
 					}
 				</DropdownMenu>
 			</Dropdown>

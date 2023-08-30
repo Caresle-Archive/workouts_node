@@ -13,6 +13,8 @@ const NavBarButton : FC<INavBarButton> = (props: INavBarButton) => {
 	return (
 		<Button
 			disableRipple
+			elementType={'button'}
+			onPress={() => {}}
 			radius="sm"
 			variant="faded"
 		>
