@@ -55,9 +55,14 @@ const routes : IRouteItem[] = [
 		component: Views.user,
 		subRoutes: [
 			{
-				path: '/user/name',
-				name: 'user-name',
+				path: '/user',
+				name: 'user',
 				component: Views.user,
+			},
+			{
+				path: '/user/list',
+				name: 'User list',
+				component: Views.userList,
 			}
 		]
 	},

@@ -62,7 +62,7 @@ const generateRoutes = (route: IRouteItem) => {
 
 const NavBar : FC = () => {
 	return (
-		<NavNext>
+		<NavNext isBordered={true} className="shadow-sm shadow-gray-600">
 			{/* Brand */}
 			<NavbarBrand>
 				Workouts
