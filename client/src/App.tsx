@@ -26,8 +26,8 @@ const App = () => {
 
   return (
     <NextUIProvider>
-			<ThemeProvider attribute="class" defaultTheme="dark">
-				<main>
+			<ThemeProvider attribute="class">
+				<main className="caresle-theme bg-background h-[100vh]">
 					<BrowserRouter>
 						<NavBar />
 						<Routes>
