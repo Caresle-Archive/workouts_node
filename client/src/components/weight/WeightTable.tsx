@@ -7,8 +7,14 @@ import {
 	TableColumn,
 	TableHeader,
 	TableRow,
+	Tooltip,
 } from "@nextui-org/react";
 import React from "react";
+import {
+	mdiPencil,
+	mdiTrashCan,
+} from '@mdi/js';
+import Icon from '@mdi/react';
 
 enum ColumnKeys {
 	WEIGHT = "weight",
@@ -58,10 +64,18 @@ const WeightTable : FC = () => {
 		if (columnKey == ColumnKeys.ACTIONS) {
 			return (
 				<>
-					<Button color="secondary" isIconOnly radius="full" variant="ghost"></Button>
-					<Button color="danger" isIconOnly className="mx-2" variant="ghost"
-						radius="full"
-					></Button>
+					<Tooltip color="secondary" content="Edit Weight" delay={500}>
+						<Button color="default" isIconOnly radius="full" variant="ghost">
+							<Icon path={mdiPencil} size={1}/>
+						</Button>
+					</Tooltip>
+					<Tooltip color="danger" content="Delete Weight" delay={500}>
+						<Button color="danger" isIconOnly className="mx-2" variant="ghost"
+							radius="full"
+						>
+							<Icon path={mdiTrashCan} size={1}/>
+						</Button>
+					</Tooltip>
 				</>
 			)
 		}
