@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 import entities from './entity/entity';
-
+import Environment from './environment';
 interface IDBConfig {
 	name?: string;
 	host?: string;
@@ -11,11 +11,11 @@ interface IDBConfig {
 
 const getConfig = () : IDBConfig => {
 	return {
-		name: process.env.DB_NAME ?? '',
-		host: process.env.DB_HOST ?? '',
-		username: process.env.DB_USER ?? '',
-		password: process.env.DB_PASS ?? '',
-		port: process.env.DB_PORT ? Number(process.env.DB_PORT) : undefined,
+		name: Environment.DB_NAME,
+		host: Environment.DB_HOST,
+		username: Environment.DB_USER,
+		password: Environment.DB_PASS,
+		port: Environment.DB_PORT,
 	};
 };
 

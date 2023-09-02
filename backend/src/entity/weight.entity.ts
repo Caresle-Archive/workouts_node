@@ -14,4 +14,7 @@ export class Weight extends BaseEntity {
 		name: 'id_user',
 	})
 		idUser : number;
+
+	@Column()
+		weight: number;
 }
