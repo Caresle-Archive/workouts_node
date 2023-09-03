@@ -6,17 +6,19 @@ import {
 } from '../components/weight/weight';
 import { useDisclosure } from '@nextui-org/react';
 const WeightView : FC = () => {
-	const { isOpen, onOpen, onOpenChange } = useDisclosure();
+	const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
 	return (
 		<div className='p-10 max-w-5xl mx-auto'>
 			<WeightActions onOpen={onOpen}/>
 
 			{/* Add weight */}
-			<WeightForm isOpen={isOpen} onOpenChange={onOpenChange} title='New Weight'/>
+			<WeightForm
+				isOpen={isOpen} onOpenChange={onOpenChange} title='New Weight'
+				onClose={onClose}
+			/>
 
 			<div className='my-5'></div>
-
 			<WeightTable />
 		</div>
 	);

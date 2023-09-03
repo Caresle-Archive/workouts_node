@@ -8,6 +8,7 @@ import {
 	TableHeader,
 	TableRow,
 	Tooltip,
+	useDisclosure,
 } from "@nextui-org/react";
 import React from "react";
 import {
@@ -15,6 +16,7 @@ import {
 	mdiTrashCan,
 } from '@mdi/js';
 import Icon from '@mdi/react';
+import { ActionModal } from "../common/common";
 
 enum ColumnKeys {
 	WEIGHT = "weight",
@@ -59,8 +61,15 @@ const rows : IWeightRow[] = [
 	},
 ]
 
+interface ITableOptions {
+	onOpen: () => void;
+	onPress: () => void;
+}
+
 const WeightTable : FC = () => {
-	const renderCell = React.useCallback((weight: IWeightRow, columnKey: React.Key) => {
+	const { onClose, onOpen, isOpen, onOpenChange } = useDisclosure();
+
+	const renderCell = React.useCallback((weight: IWeightRow, columnKey: React.Key, onOpen: () => void) => {
 		if (columnKey == ColumnKeys.ACTIONS) {
 			return (
 				<>
@@ -71,8 +80,8 @@ const WeightTable : FC = () => {
 					</Tooltip>
 					<Tooltip color="danger" content="Delete Weight" delay={500}>
 						<Button color="danger" isIconOnly className="mx-2" variant="ghost"
-							radius="full"
-						>
+							radius="full" onPress={onOpen}
+							>
 							<Icon path={mdiTrashCan} size={1}/>
 						</Button>
 					</Tooltip>
@@ -84,6 +93,9 @@ const WeightTable : FC = () => {
 
 	return (
 		<>
+			<ActionModal title="Delete Weight" text="Do you wish to delete this weight"
+				isOpen={isOpen} onClose={onClose} onOpenChange={onOpenChange} onPress={() => console.log('delete')}
+			/>
 			<Table aria-label="Weight table">
 				<TableHeader columns={columns}>
 					{ (column => (
@@ -98,7 +110,7 @@ const WeightTable : FC = () => {
 							<TableRow key={item.key}>
 								{(columnKey) => (
 									<TableCell className="text-center">
-										{ renderCell(item, columnKey)}
+										{ renderCell(item, columnKey, onOpen)}
 									</TableCell>
 								)}
 							</TableRow>

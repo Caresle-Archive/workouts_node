@@ -1,7 +1,7 @@
 export default class ErrorMessages {
-	static invalidJSON() : string {
-		return 'Invalid JSON';
-	}
+	static generalError = () => 'General Error';
+
+	static invalidJSON = () => 'Invalid JSON';
 
 	static required(field: string) : string {
 		return `The ${field} is required`;

@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import { entitiesList } from '../entity/entity';
+import { getError } from '../helpers/responseError.helpers';
+import ErrorMessages from '../helpers/errorMessages.helpers';
 
 const User = entitiesList.user;
 
@@ -12,11 +14,8 @@ export const getUsers = async (_: Request, res: Response) => {
 			data: users,
 		});
 	} catch (error) {
-		return res.status(500).json({
-			success: false,
-			message: 'Error',
-			data: [],
-		});
+		console.log(error);
+		return getError(ErrorMessages.generalError());
 	}
 };
 
@@ -29,11 +28,8 @@ export const postUser = async (req: Request, res: Response) => {
 			data: []
 		});
 	} catch (error) {
-		return res.status(500).json({
-			success: false,
-			message: 'Error',
-			data: [],
-		});
+		console.log(error);
+		return res.status(500).json(getError(ErrorMessages.generalError()));
 	}
 };
 
@@ -47,11 +43,7 @@ export const putUser = async (req: Request, res: Response) => {
 			data: [],
 		});
 	} catch (error) {
-		return res.status(500).json({
-			success: false,
-			message: 'Error',
-			data: [],
-		});
+		return res.status(500).json(getError(ErrorMessages.generalError()));
 	}
 };
 
@@ -64,10 +56,7 @@ export const deleteUser = async (req: Request, res: Response) => {
 			data: [],
 		});
 	} catch (error) {
-		return res.status(500).json({
-			success: false,
-			message: 'Error',
-			data: [],
-		});
+		console.log(error);
+		return getError(ErrorMessages.generalError());
 	}
 };
