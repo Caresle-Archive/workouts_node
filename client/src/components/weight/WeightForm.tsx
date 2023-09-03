@@ -4,22 +4,14 @@ import {
 	ModalContent,
 	ModalHeader,
 	ModalBody,
-	ModalFooter,
-	Button,
 	Input,
 } from "@nextui-org/react";
+import {
+	IFormDetails,
+} from '../../helpers/modalControls.helpers'
+import { FooterModal } from "../common/common";
 
-interface IWeightForm {
-	title?: string;
-	isOpen: boolean;
-	isEdit?: boolean;
-	onOpenChange: () => void;
-	onClose: () => void;
-	onSave?: () => void;
-	onUpdate?: () => void;
-}
-
-const WeightForm : FC<IWeightForm> = (props: IWeightForm) => {
+const WeightForm : FC<IFormDetails> = (props: IFormDetails) => {
 	const { isOpen, onOpenChange, title, onClose, onSave, onUpdate } = props;
 	let { isEdit } = props;
 
@@ -36,13 +28,7 @@ const WeightForm : FC<IWeightForm> = (props: IWeightForm) => {
 						<Input placeholder="Date" type="date" variant="faded" label="Date" className="mx-1" />
 					</div>
 				</ModalBody>
-				<ModalFooter>
-					<Button color="default" variant="bordered" onPress={onClose}>Cancel</Button>
-					{
-						isEdit ? <Button color="primary" onPress={onUpdate}>Update</Button>
-						: <Button color="primary" onPress={onSave}>Add</Button>
-					}
-				</ModalFooter>
+				<FooterModal onClose={onClose} onSave={onSave} onUpdate={onUpdate} isEdit={isEdit} />
 			</ModalContent>
 		</Modal>
 	);

@@ -1,14 +1,16 @@
-import { Button } from "@nextui-org/react";
 import { FC } from "react";
+import {
+	AddButton,
+} from '../common/common';
+import {
+	IAddAction,
+} from '../../helpers/modalControls.helpers';
 
-interface IWeightActions {
-	onOpen: () => void;
-}
 
-const WeightActions : FC<IWeightActions> = (props: IWeightActions) => {
+const WeightActions : FC<IAddAction> = (props: IAddAction) => {
 	const { onOpen } = props;
 	return (
-		<Button color="primary" onPress={onOpen}>Add Weight</Button>
+		<AddButton onOpen={onOpen} title="Add Weight" />
 	);
 };
 

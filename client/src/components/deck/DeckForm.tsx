@@ -2,7 +2,13 @@ import { FC } from "react";
 import {
 	IFormDetails,
 } from '../../helpers/modalControls.helpers';
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from "@nextui-org/react";
+import {
+	Modal,
+	ModalBody,
+	ModalContent,
+	ModalHeader,
+} from "@nextui-org/react";
+import { FooterModal } from "../common/common";
 
 const DeckForm : FC<IFormDetails> = (props: IFormDetails) => {
 	const {
@@ -21,13 +27,7 @@ const DeckForm : FC<IFormDetails> = (props: IFormDetails) => {
 				<ModalBody>
 
 				</ModalBody>
-				<ModalFooter>
-					<Button color="default" variant="bordered" onPress={onClose}>Cancel</Button>
-					{
-						isEdit ? <Button color="primary" onPress={onUpdate}>Update</Button>
-						: <Button color="primary" onPress={onSave}>Add</Button>
-					}
-				</ModalFooter>
+				<FooterModal isEdit={isEdit} onClose={onClose} onSave={onSave} onUpdate={onUpdate} />
 			</ModalContent>
 		</Modal>
 	);
