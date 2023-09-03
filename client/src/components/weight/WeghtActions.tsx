@@ -8,9 +8,7 @@ interface IWeightActions {
 const WeightActions : FC<IWeightActions> = (props: IWeightActions) => {
 	const { onOpen } = props;
 	return (
-		<>
-			<Button color="primary" onPress={onOpen}>Add Weight</Button>
-		</>
+		<Button color="primary" onPress={onOpen}>Add Weight</Button>
 	);
 };
 
