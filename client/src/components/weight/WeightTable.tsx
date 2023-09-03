@@ -61,20 +61,20 @@ const rows : IWeightRow[] = [
 	},
 ]
 
-interface ITableOptions {
-	onOpen: () => void;
-	onPress: () => void;
+interface IWeightTable {
+	openEdit: () => void;
 }
 
-const WeightTable : FC = () => {
+const WeightTable : FC<IWeightTable> = (props: IWeightTable) => {
 	const { onClose, onOpen, isOpen, onOpenChange } = useDisclosure();
+	const { openEdit } = props;
 
 	const renderCell = React.useCallback((weight: IWeightRow, columnKey: React.Key, onOpen: () => void) => {
 		if (columnKey == ColumnKeys.ACTIONS) {
 			return (
 				<>
 					<Tooltip color="secondary" content="Edit Weight" delay={500}>
-						<Button color="default" isIconOnly radius="full" variant="ghost">
+						<Button color="default" isIconOnly radius="full" variant="ghost" onPress={openEdit}>
 							<Icon path={mdiPencil} size={1}/>
 						</Button>
 					</Tooltip>
@@ -89,7 +89,7 @@ const WeightTable : FC = () => {
 			)
 		}
 		return <span>{weight[columnKey as keyof typeof weight]}</span>
-	}, []);
+	}, [openEdit]);
 
 	return (
 		<>

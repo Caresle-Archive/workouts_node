@@ -12,12 +12,19 @@ import {
 interface IWeightForm {
 	title?: string;
 	isOpen: boolean;
+	isEdit?: boolean;
 	onOpenChange: () => void;
 	onClose: () => void;
+	onSave?: () => void;
+	onUpdate?: () => void;
 }
 
 const WeightForm : FC<IWeightForm> = (props: IWeightForm) => {
-	const { isOpen, onOpenChange, title, onClose } = props;
+	const { isOpen, onOpenChange, title, onClose, onSave, onUpdate } = props;
+	let { isEdit } = props;
+
+	if (isEdit === undefined || isEdit === null)
+		isEdit = false;
 
 	return (
 		<Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl">
@@ -31,7 +38,10 @@ const WeightForm : FC<IWeightForm> = (props: IWeightForm) => {
 				</ModalBody>
 				<ModalFooter>
 					<Button color="default" variant="bordered" onPress={onClose}>Cancel</Button>
-					<Button color="primary">Add</Button>
+					{
+						isEdit ? <Button color="primary" onPress={onUpdate}>Update</Button>
+						: <Button color="primary" onPress={onSave}>Add</Button>
+					}
 				</ModalFooter>
 			</ModalContent>
 		</Modal>
