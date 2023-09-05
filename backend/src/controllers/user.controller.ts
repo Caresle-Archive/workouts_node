@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { entitiesList } from '../entity/entity';
-import { getError } from '../helpers/responseError.helpers';
+import { IGeneralError, getError } from '../helpers/responseError.helpers';
 import ErrorMessages from '../helpers/errorMessages.helpers';
 import Validator from '../helpers/validator.helpers';
 
@@ -20,7 +20,7 @@ export const getUsers = async (_: Request, res: Response) => {
 	}
 };
 
-const validateUser = (username: string, password: string) => {
+const validateUser = (username: string, password: string) : IGeneralError | null => {
 	if (Validator.empty(username)) return getError(ErrorMessages.required('username'));
 	if (Validator.empty(password)) return getError(ErrorMessages.required('password'));
 
@@ -35,6 +35,8 @@ export const postUser = async (req: Request, res: Response) => {
 		const { username, password } = req.body;
 
 		const errors = validateUser(username, password);
+
+		if (errors !== null) return res.status(400).json(errors);
 
 		// Validate user doesn't exists in the db
 		const users = await User.findAndCountBy({
@@ -62,11 +64,9 @@ export const putUser = async (req: Request, res: Response) => {
 
 		const { username, password  } = req.body;
 
-		if (Validator.empty(username)) return res.status(400).json(getError(ErrorMessages.required('username')));
-		if (Validator.empty(password)) return res.status(400).json(getError(ErrorMessages.required('password')));
+		const errors = validateUser(username, password);
 
-		if (!Validator.minLength(username, 5)) return res.status(400).json(getError(ErrorMessages.minLength('username', 5)));
-		if (!Validator.minLength(password, 5)) return res.status(400).json(getError(ErrorMessages.minLength('password', 5)));
+		if (errors !== null) return res.status(400).json(errors);
 
 		return res.json({
 			success: true,
