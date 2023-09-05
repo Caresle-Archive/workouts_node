@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { entitiesList } from '../entity/entity';
 import { getError } from '../helpers/responseError.helpers';
 import ErrorMessages from '../helpers/errorMessages.helpers';
+import Validator from '../helpers/validator.helpers';
 
 const User = entitiesList.user;
 
@@ -19,9 +20,29 @@ export const getUsers = async (_: Request, res: Response) => {
 	}
 };
 
+const validateUser = (username: string, password: string) => {
+	if (Validator.empty(username)) return getError(ErrorMessages.required('username'));
+	if (Validator.empty(password)) return getError(ErrorMessages.required('password'));
+
+	if (!Validator.minLength(username, 5)) return getError(ErrorMessages.minLength('username', 5));
+	if (!Validator.minLength(password, 5)) return getError(ErrorMessages.minLength('password', 5));
+
+	return null;
+};
+
 export const postUser = async (req: Request, res: Response) => {
 	try {
-		console.log(req.body);
+		const { username, password } = req.body;
+
+		const errors = validateUser(username, password);
+
+		// Validate user doesn't exists in the db
+		const users = await User.findAndCountBy({
+			username: username,
+		});
+
+		console.log(users);
+
 		return res.json({
 			success: true,
 			message: 'User created',
@@ -35,8 +56,18 @@ export const postUser = async (req: Request, res: Response) => {
 
 export const putUser = async (req: Request, res: Response) => {
 	try {
-		console.log(req.body);
-		console.log(req.params);
+		const { id } = req.params;
+
+		if (Validator.empty(id)) return res.status(400).json(getError(ErrorMessages.required('id')));
+
+		const { username, password  } = req.body;
+
+		if (Validator.empty(username)) return res.status(400).json(getError(ErrorMessages.required('username')));
+		if (Validator.empty(password)) return res.status(400).json(getError(ErrorMessages.required('password')));
+
+		if (!Validator.minLength(username, 5)) return res.status(400).json(getError(ErrorMessages.minLength('username', 5)));
+		if (!Validator.minLength(password, 5)) return res.status(400).json(getError(ErrorMessages.minLength('password', 5)));
+
 		return res.json({
 			success: true,
 			message: 'User updated',
