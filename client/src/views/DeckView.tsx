@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import {
-	DeckAction, DeckForm
+	DeckAction, DeckForm, DeckTable
 } from '../components/deck/deck';
 import {
 	onOpenModal,
@@ -18,6 +18,8 @@ const DeckView : FC = () => {
 			<DeckForm title='open' isOpen={showCreate} onClose={() => onCloseModal(setShowCreate)}
 				onOpenChange={() => onOpenChangeModal(showCreate, setShowCreate)}
 			/>
+
+			<DeckTable />
 		</div>
 	);
 };
