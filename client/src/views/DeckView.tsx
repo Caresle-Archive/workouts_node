@@ -10,6 +10,7 @@ import {
 
 const DeckView : FC = () => {
 	const [ showCreate, setShowCreate ] = useState(false);
+	const [ showEdit, setShowEdit ] = useState(false);
 
 	return (
 		<div className='p-10 max-w-5xl mx-auto'>
@@ -18,8 +19,12 @@ const DeckView : FC = () => {
 			<DeckForm title='open' isOpen={showCreate} onClose={() => onCloseModal(setShowCreate)}
 				onOpenChange={() => onOpenChangeModal(showCreate, setShowCreate)}
 			/>
+			<DeckForm title='edit' isOpen={showEdit} onClose={() => onCloseModal(setShowEdit)}
+				onOpenChange={() => onOpenChangeModal(showEdit, setShowEdit)} isEdit
+			/>
 
-			<DeckTable />
+			<div className='my-5'></div>
+			<DeckTable openEdit={() => onOpenModal(setShowEdit)} />
 		</div>
 	);
 };
